@@ -5,4 +5,12 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "cSpell.words": [
+        "antd",
+        "nextjs",
+        "openapi",
+        "pino",
+        "tailwindcss",
+        "typeorm"
+    ],
 }

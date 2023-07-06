@@ -1,45 +1,45 @@
-import NProgress from "nprogress";
-import { useEffect } from "react";
+import NProgress from "nprogress"
+import { useEffect } from "react"
 
 type PushStateInput = [
   data: unknown,
   unused: string,
   url?: string | URL | null | undefined
-];
+]
 
 export default function ProgressBar() {
   useEffect(() => {
-    NProgress.configure({ showSpinner: false });
+    NProgress.configure({ showSpinner: false })
 
     const handleAnchorClick = (event: MouseEvent) => {
-      const targetUrl = (event.currentTarget as HTMLAnchorElement).href;
-      const currentUrl = window.location.href;
+      const targetUrl = (event.currentTarget as HTMLAnchorElement).href
+      const currentUrl = window.location.href
       if (targetUrl !== currentUrl) {
-        NProgress.start();
+        NProgress.start()
       }
-    };
+    }
 
     const handleMutation: MutationCallback = () => {
       const anchorElements: NodeListOf<HTMLAnchorElement> =
-        document.querySelectorAll("a[href]");
+        document.querySelectorAll("a[href]")
 
       anchorElements.forEach((anchor) =>
         anchor.addEventListener("click", handleAnchorClick)
-      );
-    };
+      )
+    }
 
-    const mutationObserver = new MutationObserver(handleMutation);
-    mutationObserver.observe(document, { childList: true, subtree: true });
+    const mutationObserver = new MutationObserver(handleMutation)
+    mutationObserver.observe(document, { childList: true, subtree: true })
 
     window.history.pushState = new Proxy(window.history.pushState, {
       apply: (target, thisArg, argArray: PushStateInput) => {
-        NProgress.done();
-        return target.apply(thisArg, argArray);
+        NProgress.done()
+        return target.apply(thisArg, argArray)
       },
-    });
-  });
-  const height = "2px";
-  const color = "#73d13d";
+    })
+  })
+  const height = "2px"
+  const color = "#73d13d"
 
   const styles = (
     <style>
@@ -71,7 +71,7 @@ export default function ProgressBar() {
         }
     `}
     </style>
-  );
+  )
 
-  return styles;
+  return styles
 }

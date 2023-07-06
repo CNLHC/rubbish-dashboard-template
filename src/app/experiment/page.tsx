@@ -1,3 +1,3 @@
 export default function ExperimentPage() {
-  return <div>experiment page</div>;
+  return <div>experiment page</div>
 }

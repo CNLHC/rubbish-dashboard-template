@@ -5,10 +5,10 @@ import {
   DatabaseOutlined,
   DotChartOutlined,
   ExperimentOutlined,
-} from "@ant-design/icons";
-import { Menu, MenuProps } from "antd";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+} from "@ant-design/icons"
+import { Menu, MenuProps } from "antd"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 
 const MenuItems: MenuProps["items"] = [
   {
@@ -41,21 +41,21 @@ const MenuItems: MenuProps["items"] = [
     label: <Link href="/experiment">实验管理</Link>,
     icon: <ExperimentOutlined />,
   },
-];
+]
 
 export default function MainMenu() {
-  const path = usePathname();
-  const router = useRouter();
+  const path = usePathname()
+  const router = useRouter()
   return (
     <Menu
       selectedKeys={[path]}
       onClick={(e) => {
-        router.push(e.key);
+        router.push(e.key)
       }}
       theme="dark"
       mode="inline"
       defaultSelectedKeys={["4"]}
       items={MenuItems}
     />
-  );
+  )
 }

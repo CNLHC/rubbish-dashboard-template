@@ -1,0 +1,8 @@
+disallowAdditionalPropertiesIfNotPresent: false
+paramNaming: snake_case
+supportsES6: true
+useSingleRequestParameter: true
+legacyDiscriminatorBehavior: false
+withSeparateModelsAndApi: true
+apiPackage: api
+modelPackage: models

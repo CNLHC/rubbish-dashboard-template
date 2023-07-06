@@ -1,22 +1,22 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Provider } from "react-redux";
-import MainLayout from "../components/main-layout";
-import ProgressBar from "../components/progress-bar";
-import { store } from "../libs/redux";
+"use client"
+import React, { useEffect, useState } from "react"
+import { Provider } from "react-redux"
+import MainLayout from "../components/main-layout"
+import ProgressBar from "../components/progress-bar"
+import { store } from "../libs/redux"
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   if (typeof window !== "undefined") {
     window.onload = () => {
-      document.getElementById("holderStyle")!.remove();
-    };
+      document.getElementById("holderStyle")!.remove()
+    }
   }
   return (
     <Provider store={store}>
@@ -39,5 +39,5 @@ export default function RootLayout({
         </body>
       </html>
     </Provider>
-  );
+  )
 }

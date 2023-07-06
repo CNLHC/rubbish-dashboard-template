@@ -1,0 +1,12 @@
+{
+    "verbose": false,
+    "delay": 500,
+    "execMap": {
+        "ts": "ts-node"
+    },
+    "watch": [
+        "./src",
+        "../gitlab/src",
+        "./db/**/*.ts"
+    ]
+}

@@ -1,5 +1,5 @@
 const DataPage = () => {
-  return <div>DataPage</div>;
-};
+  return <div>DataPage</div>
+}
 
-export default DataPage;
+export default DataPage

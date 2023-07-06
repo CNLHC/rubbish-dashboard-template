@@ -1,5 +1,5 @@
 const WorkflowPage = () => {
-  return <div>WorkflowPage</div>;
-};
+  return <div>WorkflowPage</div>
+}
 
-export default WorkflowPage;
+export default WorkflowPage

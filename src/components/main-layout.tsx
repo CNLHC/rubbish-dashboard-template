@@ -1,17 +1,17 @@
-import { Layout, theme } from "antd";
-import Sider from "antd/es/layout/Sider";
-import { Content, Footer, Header } from "antd/es/layout/layout";
-import React from "react";
-import MainMenu from "./main-menu";
+import { Layout, theme } from "antd"
+import Sider from "antd/es/layout/Sider"
+import { Content, Footer, Header } from "antd/es/layout/layout"
+import React from "react"
+import MainMenu from "./main-menu"
 
 export default function MainLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   const {
     token: { colorBgContainer },
-  } = theme.useToken();
+  } = theme.useToken()
   return (
     <Layout hasSider>
       <Sider
@@ -47,5 +47,5 @@ export default function MainLayout({
         </Footer>
       </Layout>
     </Layout>
-  );
+  )
 }
