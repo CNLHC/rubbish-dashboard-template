@@ -10,7 +10,7 @@ import { Menu, MenuProps } from "antd"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
-const MenuItems: MenuProps["items"] = [
+export const MenuItems: MenuProps["items"] = [
   {
     key: "/",
     label: <Link href="/">首页</Link>,
@@ -48,6 +48,7 @@ export default function MainMenu() {
   const router = useRouter()
   return (
     <Menu
+      style={{ width: "200px" }}
       selectedKeys={[path]}
       onClick={(e) => {
         router.push(e.key)

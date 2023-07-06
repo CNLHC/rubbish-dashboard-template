@@ -1,7 +1,9 @@
 import { Layout, theme } from "antd"
 import Sider from "antd/es/layout/Sider"
-import { Content, Footer, Header } from "antd/es/layout/layout"
+import { Content, Footer } from "antd/es/layout/layout"
 import React from "react"
+import MainBreadcrumb from "./main-breadcrumb"
+import MainHeader from "./main-header"
 import MainMenu from "./main-menu"
 
 export default function MainLayout({
@@ -25,23 +27,28 @@ export default function MainLayout({
         }}
       >
         <div className="demo-logo-vertical">
-          <span className="">Parallel Systems</span>
+          <p className="text-white font-sans font-bold text-xl mx-auto text-center">
+            Parallel Systems
+          </p>
         </div>
         <MainMenu />
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
-          <div
-            style={{
-              padding: 24,
-              textAlign: "center",
-              background: colorBgContainer,
-            }}
-          >
-            {children}
-          </div>
-        </Content>
+        <MainHeader />
+        <div className="mx-4 my-4">
+          <MainBreadcrumb />
+          <Content>
+            <div
+              style={{
+                padding: 24,
+                textAlign: "center",
+                background: colorBgContainer,
+              }}
+            >
+              {children}
+            </div>
+          </Content>
+        </div>
         <Footer style={{ textAlign: "center" }}>
           ©2023 Created by Seekthought
         </Footer>
