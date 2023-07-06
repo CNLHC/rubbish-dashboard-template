@@ -14,7 +14,7 @@ const initGlobalState: TGlobalState = {
   version: 0,
 }
 
-export const ActSetGlobalState = createAction<number>(
+export const ActSetGlobalState = createAction(
   "setGlobalState" as const
 ) as ActionCreatorWithPayload<Partial<TGlobalState>>
 
