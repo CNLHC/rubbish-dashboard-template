@@ -22,3 +22,6 @@ stacks:
 - [ ] reduce docker image size
 - [ ] split frontend and server docker
 - [ ] observability using `sentry` and `prometheus`
+- [ ] curd example
+- [ ] multipart example
+- [ ] dark mode switch
