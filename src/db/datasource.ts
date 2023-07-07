@@ -7,4 +7,5 @@ export const db = new DataSource({
   migrationsTableName: "migrations",
   migrations: [path.join(__dirname, "migrations", "*.ts")],
   synchronize: false,
+  entities: [path.join(__dirname, "entities", "*.ts")],
 })
