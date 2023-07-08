@@ -39,16 +39,15 @@ export default function MainLayout({
       <Layout className="site-layout">
         <MainHeader />
         <Content className="mx-4 my-4 min-h-[calc(100vh_-_48px_-_64px_-_32px)]">
-          <div className="mx-4 my-4">
-            <MainBreadcrumb />
-            <div
-              style={{
-                padding: 24,
-                textAlign: "center",
-              }}
-            >
-              {children}
-            </div>
+          <MainBreadcrumb />
+          <div
+            className="p-4 rounded-md"
+            style={{
+              textAlign: "center",
+              background: colorBgContainer,
+            }}
+          >
+            {children}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }} className="py-5">
