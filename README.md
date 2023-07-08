@@ -13,6 +13,7 @@ stacks:
 - log with `pino`
 - lint with `eslint` + `prettier`
 - deploy with `pm2` and pack all the application into one `docker image`
+- dark mode switch
 
 `pnpm i && pnpm dev` and everything is ready to go
 
@@ -24,4 +25,3 @@ stacks:
 - [ ] observability using `sentry` and `prometheus`
 - [ ] curd example
 - [ ] multipart example
-- [ ] dark mode switch

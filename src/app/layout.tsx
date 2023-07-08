@@ -4,7 +4,17 @@ import { Provider } from "react-redux"
 import MainLayout from "../components/main-layout"
 import ProgressBar from "../components/progress-bar"
 import { store } from "../libs/redux"
+import "./global.css"
+import { Inter, Roboto_Mono } from "next/font/google"
+import { ConfigProvider, theme } from "antd"
+import classNames from "classnames"
+import { DarkCtx } from "../components/dark-mode"
 
+export const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+})
 export default function RootLayout({
   children,
 }: {
@@ -18,26 +28,34 @@ export default function RootLayout({
       document.getElementById("holderStyle")!.remove()
     }
   }
+
+  const [isDarkMode, setIsDarkMode] = useState(true)
+  const { defaultAlgorithm, darkAlgorithm } = theme
+
   return (
-    <Provider store={store}>
-      <html lang="en">
-        <head>
-          <style
-            id="holderStyle"
-            dangerouslySetInnerHTML={{
-              __html: `
-                    *, *::before, *::after {
-                        transition: none!important;
-                    }
-                    `,
-            }}
-          />
-        </head>
-        <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
-          <ProgressBar />
-          <MainLayout>{children}</MainLayout>
-        </body>
-      </html>
-    </Provider>
+    <DarkCtx.Provider value={{ isDarkMode, setIsDarkMode }}>
+      <ConfigProvider
+        theme={{
+          algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+        }}
+      >
+        <Provider store={store}>
+          <html
+            lang="en"
+            className={classNames(
+              roboto_mono.variable,
+              { dark: isDarkMode },
+              { "text-dark-text-base": isDarkMode }
+            )}
+          >
+            <head></head>
+            <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
+              <ProgressBar />
+              <MainLayout>{children}</MainLayout>
+            </body>
+          </html>
+        </Provider>
+      </ConfigProvider>
+    </DarkCtx.Provider>
   )
 }

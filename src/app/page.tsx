@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "antd"
+import { Button, Statistic } from "antd"
 import { useAppDispatch, useAppSelector } from "../libs/redux"
 import { ActSetGlobalState } from "../libs/redux/global"
 import "./global.css"
@@ -11,8 +11,8 @@ const IndexPage = () => {
 
   return (
     <div>
-      <Button onClick={() => add()}></Button>
-      ver:{version}
+      <Button onClick={() => add()}> Click To Add</Button>
+      <Statistic title={"counter"} value={version} />
     </div>
   )
 }

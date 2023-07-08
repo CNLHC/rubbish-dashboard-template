@@ -1,10 +1,11 @@
 import { Layout, theme } from "antd"
-import Sider from "antd/es/layout/Sider"
-import { Content, Footer } from "antd/es/layout/layout"
-import React from "react"
+import React, { useState } from "react"
 import MainBreadcrumb from "./main-breadcrumb"
 import MainHeader from "./main-header"
 import MainMenu from "./main-menu"
+import classNames from "classnames"
+
+const { Header, Content, Footer, Sider } = Layout
 
 export default function MainLayout({
   children,
@@ -14,43 +15,46 @@ export default function MainLayout({
   const {
     token: { colorBgContainer },
   } = theme.useToken()
+  const [collapsed, setCollapsed] = useState(false)
   return (
-    <Layout hasSider>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        theme="light"
       >
         <div className="demo-logo-vertical">
-          <p className="text-white font-sans font-bold text-xl mx-auto text-center">
+          <p
+            className={classNames(
+              "font-sans font-bold  mx-auto text-center ",
+              collapsed ? "text-sm" : "text-xl"
+            )}
+          >
             Parallel Systems
           </p>
         </div>
         <MainMenu />
       </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+      <Layout className="site-layout">
         <MainHeader />
-        <div className="mx-4 my-4">
-          <MainBreadcrumb />
-          <Content>
+        <Content className="mx-4 my-4 min-h-[calc(100vh_-_48px_-_64px_-_32px)]">
+          <div className="mx-4 my-4">
+            <MainBreadcrumb />
             <div
               style={{
                 padding: 24,
                 textAlign: "center",
-                background: colorBgContainer,
               }}
             >
               {children}
             </div>
-          </Content>
-        </div>
-        <Footer style={{ textAlign: "center" }}>
-          ©2023 Created by Seekthought
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }} className="py-5">
+          <span className="text-sm leading-6">
+            ©2023 Created by Seekthought
+          </span>
         </Footer>
       </Layout>
     </Layout>

@@ -48,12 +48,13 @@ export default function MainMenu() {
   const router = useRouter()
   return (
     <Menu
-      style={{ width: "200px" }}
+      style={{
+        borderInlineEnd: "none",
+      }}
       selectedKeys={[path]}
       onClick={(e) => {
         router.push(e.key)
       }}
-      theme="dark"
       mode="inline"
       defaultSelectedKeys={["4"]}
       items={MenuItems}
