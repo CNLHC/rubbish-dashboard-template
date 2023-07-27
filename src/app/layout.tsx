@@ -9,6 +9,7 @@ import { Inter, Roboto_Mono } from "next/font/google"
 import { ConfigProvider, theme } from "antd"
 import classNames from "classnames"
 import { DarkCtx } from "../components/dark-mode"
+import { MantineProvider } from "@mantine/core"
 
 export const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
@@ -34,28 +35,30 @@ export default function RootLayout({
 
   return (
     <DarkCtx.Provider value={{ isDarkMode, setIsDarkMode }}>
-      <ConfigProvider
-        theme={{
-          algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-        }}
-      >
-        <Provider store={store}>
-          <html
-            lang="en"
-            className={classNames(
-              roboto_mono.variable,
-              { dark: isDarkMode },
-              { "text-dark-text-base": isDarkMode }
-            )}
-          >
-            <head></head>
-            <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
-              <ProgressBar />
-              <MainLayout>{children}</MainLayout>
-            </body>
-          </html>
-        </Provider>
-      </ConfigProvider>
+      <MantineProvider theme={{ colorScheme: isDarkMode ? "dark" : "light" }}>
+        <ConfigProvider
+          theme={{
+            algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+          }}
+        >
+          <Provider store={store}>
+            <html
+              lang="en"
+              className={classNames(
+                roboto_mono.variable,
+                { dark: isDarkMode },
+                { "text-dark-text-base": isDarkMode }
+              )}
+            >
+              <head></head>
+              <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
+                <ProgressBar />
+                <MainLayout>{children}</MainLayout>
+              </body>
+            </html>
+          </Provider>
+        </ConfigProvider>
+      </MantineProvider>
     </DarkCtx.Provider>
   )
 }

@@ -1,4 +1,6 @@
 @tailwind utilities;
+@tailwind components;
+
 
 body {
   margin: 0;

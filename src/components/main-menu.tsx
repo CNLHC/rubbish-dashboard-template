@@ -17,6 +17,11 @@ export const MenuItems: MenuProps["items"] = [
     icon: <DashboardOutlined />,
   },
   {
+    key: "/rte",
+    label: <Link href="/rte">富文本编辑器</Link>,
+    icon: <DatabaseOutlined />,
+  },
+  {
     key: "/data",
     label: <Link href="/data">数据管理</Link>,
     icon: <DatabaseOutlined />,
