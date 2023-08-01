@@ -4,8 +4,9 @@ An opinionated full-stack template for a dashboard project
 
 stacks:
 
-- develop frontend with `nextjs(app router)` + `antd` + `tailwindcss` + `redux`
-- develop api server with `fastify`
+- develop frontend with `nextjs(app router)` + `tailwindcss` + `redux`  
+- integrated rich-text-editor(`mantine` + `tiptap`)
+- develop api server with `fastify` and `trpc`
 - access database via `prisma` and `typeorm`
 - migrate database via `typeorm` migrate
 - generate openapi spec automatically with `@fastify/swagger` and generate api client with `openapi-generator`
