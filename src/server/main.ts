@@ -5,6 +5,9 @@ import { Type, TypeBoxTypeProvider } from "@fastify/type-provider-typebox"
 import fastify, { FastifyPluginAsync } from "fastify"
 import { SiteConfig } from "../libs/site"
 import GetLogger from "./logger"
+import { fastifyTRPCPlugin } from "@trpc/server/adapters/fastify"
+import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from "trpc-openapi"
+import { appRouter } from "./router"
 
 const logger = GetLogger()
 
@@ -64,6 +67,26 @@ const MetaView: FastifyPluginAsync = async (app) => {
   )
 }
 
+const initTRPC: FastifyPluginAsync = async (app) => {
+  const openApiDocument = generateOpenApiDocument(appRouter, {
+    title: "Example CRUD API",
+    description: "OpenAPI compliant REST API built using tRPC with Fastify",
+    version: "1.0.0",
+    baseUrl: "http://localhost:7654/trpc",
+    tags: ["meta"],
+  })
+
+  app.register(fastifyTRPCPlugin, {
+    prefix: "/trpc",
+    trpcOptions: { router: appRouter },
+  })
+  app.register(fastifyTRPCOpenApiPlugin, {
+    router: appRouter,
+    basePath: "/trpc",
+  })
+  app.get("/trpc/openapi.json", () => openApiDocument)
+}
+
 async function serve() {
   await initSwagger()
   app.register(cors, {
@@ -73,7 +96,8 @@ async function serve() {
     credentials: true,
   })
 
-  app.register(MetaView, { prefix: "/meta" })
+  await app.register(initTRPC)
+  await app.register(MetaView, { prefix: "/meta" })
 
   await app.ready()
   app.swagger()

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "next:start": "next start",
-    "dev": "pnpm dev:fe && pnpm dev:srv",
+    "dev": "pnpm dev:fe & pnpm dev:srv",
     "dev:fe": "next dev",
     "dev:srv": "nodemon --quiet ./src/server/main.ts",
     "lint": "eslint ./src --fix",
@@ -34,7 +34,6 @@
     "@mantine/core": "^6.0.17",
     "@mantine/hooks": "^6.0.17",
     "@mantine/tiptap": "^6.0.17",
-    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@prisma/client": "4.16.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@tabler/icons-react": "^2.29.0",
@@ -74,18 +73,28 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
+    "react-use": "^17.4.0",
     "reactflow": "^11.7.4",
     "redux-logger": "^3.0.6",
     "reflect-metadata": "^0.1.13",
     "swr": "^2.2.0",
     "tailwindcss": "^3.3.2",
+    "trpc-openapi": "^1.2.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.17",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@trpc/client": "^10.36.0",
+    "@trpc/server": "^10.36.0",
     "eslint": "8.44.0",
-    "eslint-config-next": "13.4.9"
+    "eslint-config-next": "13.4.9",
+    "zod": "^3.21.4"
+  },
+  "peerDependencies": {
+    "@trpc/client": "^10.36.0",
+    "@trpc/server": "^10.36.0",
+    "zod": "^3.21.4"
   }
 }
