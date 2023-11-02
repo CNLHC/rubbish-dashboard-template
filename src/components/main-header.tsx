@@ -1,9 +1,8 @@
-import { Layout, Switch, theme } from "antd"
-import { useContext } from "react"
-import { DarkCtx } from "./dark-mode"
+import { Layout, theme } from "antd"
+import { useDarkControl } from "./dark-mode"
 
 const ThemeSwitcher = () => {
-  const { isDarkMode, setIsDarkMode } = useContext(DarkCtx)!
+  const { isDarkMode, setIsDarkMode } = useDarkControl()
   return (
     <label className="swap swap-rotate text-sm w-4">
       {/* this hidden checkbox controls the state */}

@@ -5,17 +5,16 @@ import MainLayout from "../components/main-layout"
 import ProgressBar from "../components/progress-bar"
 import { store } from "../libs/redux"
 import "./global.css"
-import { Roboto_Mono } from "next/font/google"
 import { ConfigProvider, theme } from "antd"
 import classNames from "classnames"
 import { DarkCtx } from "../components/dark-mode"
-import { MantineProvider } from "@mantine/core"
+import { ColorSchemeScript, MantineProvider } from "@mantine/core"
 
-export const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto-mono",
-})
+import "@mantine/core/styles.css"
+import "@mantine/notifications/styles.css"
+import "@mantine/tiptap/styles.css"
+import "@mantine/dropzone/styles.css"
+
 export default function RootLayout({
   children,
 }: {
@@ -24,41 +23,30 @@ export default function RootLayout({
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  if (typeof window !== "undefined") {
-    window.onload = () => {
-      document.getElementById("holderStyle")!.remove()
-    }
-  }
-
   const [isDarkMode, setIsDarkMode] = useState(true)
   const { defaultAlgorithm, darkAlgorithm } = theme
 
   return (
     <DarkCtx.Provider value={{ isDarkMode, setIsDarkMode }}>
-      <MantineProvider theme={{ colorScheme: isDarkMode ? "dark" : "light" }}>
-        <ConfigProvider
-          theme={{
-            algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-          }}
-        >
-          <Provider store={store}>
-            <html
-              lang="en"
-              className={classNames(
-                roboto_mono.variable,
-                { dark: isDarkMode },
-                { "text-dark-text-base": isDarkMode }
-              )}
-            >
-              <head></head>
-              <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
+      <ConfigProvider
+        theme={{
+          algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+        }}
+      >
+        <Provider store={store}>
+          <html lang="en" className={classNames({ dark: isDarkMode })}>
+            <head>
+              <ColorSchemeScript />
+            </head>
+            <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
+              <MantineProvider>
                 <ProgressBar />
                 <MainLayout>{children}</MainLayout>
-              </body>
-            </html>
-          </Provider>
-        </ConfigProvider>
-      </MantineProvider>
+              </MantineProvider>
+            </body>
+          </html>
+        </Provider>
+      </ConfigProvider>
     </DarkCtx.Provider>
   )
 }

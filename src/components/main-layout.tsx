@@ -24,15 +24,12 @@ export default function MainLayout({
         onCollapse={(value) => setCollapsed(value)}
         theme="light"
       >
-        <div className="demo-logo-vertical">
-          <p
-            className={classNames(
-              "font-sans font-bold  mx-auto text-center ",
-              collapsed ? "text-sm" : "text-xl"
-            )}
+        <div className="text-center h-12 items-center text-black flex dark:text-white ">
+          <div
+            className={classNames("w-full", collapsed ? "text-sm" : "text-xl")}
           >
-            Parallel Systems
-          </p>
+            Demo
+          </div>
         </div>
         <MainMenu />
       </Sider>
@@ -43,7 +40,6 @@ export default function MainLayout({
           <div
             className="p-4 rounded-md"
             style={{
-              textAlign: "center",
               background: colorBgContainer,
             }}
           >
