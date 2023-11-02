@@ -13,7 +13,7 @@ const IndexPage = () => {
   const { cli } = useTRPC()
   useAsync(async () => {
     await cli.health.query()
-    notification.success({ message: "TRPC is ready" })
+    notification.success({ message: "Use Effect will render twice in the production! 😠 " })
   }, [])
 
   return (

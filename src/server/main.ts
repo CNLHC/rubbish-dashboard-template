@@ -90,7 +90,7 @@ const initTRPC: FastifyPluginAsync = async (app) => {
 async function serve() {
   await initSwagger()
   app.register(cors, {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: "*",
     allowedHeaders: "*,content-type,baggage,sentry-trace",
     credentials: true,

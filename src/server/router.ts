@@ -7,7 +7,7 @@ export const appRouter = router({
     .input(z.undefined())
     .output(z.object({ status: z.string() }))
     .query(async () => {
-      return { status: "ok" }
+      return { status: "ok", greet: "hello" }
     }),
 })
 
