@@ -1,5 +1,6 @@
 import { procedure, router } from "./trpc"
 import { z } from "zod"
+import type { inferRouterOutputs } from "@trpc/server"
 
 export const appRouter = router({
   health: procedure
@@ -12,3 +13,5 @@ export const appRouter = router({
 })
 
 export type AppRouter = typeof appRouter
+
+export type TRouterOutput = inferRouterOutputs<AppRouter>
