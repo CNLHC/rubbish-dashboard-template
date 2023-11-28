@@ -1,18 +1,14 @@
 "use client"
 import React, { useEffect, useState } from "react"
 import { Provider } from "react-redux"
-import ProgressBar from "./admin/components/progress-bar"
-import { store } from "../libs/redux"
-import "./global.css"
+import AdminLayout from "./components/admin-layout"
+import ProgressBar from "./components/progress-bar"
+import { store } from "../../libs/redux"
 import { ConfigProvider, theme } from "antd"
 import classNames from "classnames"
-import { DarkCtx } from "./admin/components/dark-mode"
+import { DarkCtx } from "./components/dark-mode"
 import { ColorSchemeScript, MantineProvider } from "@mantine/core"
 
-import "@mantine/core/styles.css"
-import "@mantine/notifications/styles.css"
-import "@mantine/tiptap/styles.css"
-import "@mantine/dropzone/styles.css"
 
 export default function RootLayout({
   children,
@@ -40,7 +36,7 @@ export default function RootLayout({
             <body style={{ visibility: !mounted ? "hidden" : "visible" }}>
               <MantineProvider>
                 <ProgressBar />
-                <div>{children}</div>
+                <AdminLayout>{children}</AdminLayout>
               </MantineProvider>
             </body>
           </html>

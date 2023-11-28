@@ -1,8 +1,8 @@
 import { Layout, theme } from "antd"
 import React, { useState } from "react"
-import MainBreadcrumb from "./main-breadcrumb"
-import MainHeader from "./main-header"
-import MainMenu from "./main-menu"
+import MainBreadcrumb from "./admin-breadcrumb"
+import MainHeader from "./admin-header"
+import MainMenu from "./admin-menu"
 import classNames from "classnames"
 
 const { Header, Content, Footer, Sider } = Layout

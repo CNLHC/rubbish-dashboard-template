@@ -2,11 +2,11 @@ import { Breadcrumb } from "antd"
 import { SubMenuType } from "antd/es/menu/hooks/useItems"
 import { usePathname } from "next/navigation"
 import { useMemo } from "react"
-import { MenuItems } from "./main-menu"
+import { MenuItems } from "./admin-menu"
 import { BreadcrumbItemType } from "antd/es/breadcrumb/Breadcrumb"
 
 const menuItems = MenuItems as Array<SubMenuType>
-const indexMenu = menuItems.find((item) => item.key === "/")!
+const indexMenu = menuItems.find((item) => item.key === "/admin")!
 
 export function buildBreadcrumb(pathname: string): Array<BreadcrumbItemType> {
   const res: Array<BreadcrumbItemType> = []
@@ -15,7 +15,7 @@ export function buildBreadcrumb(pathname: string): Array<BreadcrumbItemType> {
   let current = menuItems
   let currentPath = ""
   for (const route of ingredients) {
-    if (route == "") {
+    if (route == "/admin") {
       res.push({ title: indexMenu.label })
       continue
     }

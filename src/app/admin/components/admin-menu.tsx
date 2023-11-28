@@ -12,37 +12,37 @@ import { usePathname, useRouter } from "next/navigation"
 
 export const MenuItems: MenuProps["items"] = [
   {
-    key: "/",
+    key: "/admin",
     label: <Link href="/">首页</Link>,
     icon: <DashboardOutlined />,
   },
   {
-    key: "/rte",
+    key: "/admin/rte",
     label: <Link href="/rte">富文本编辑器</Link>,
     icon: <DatabaseOutlined />,
   },
   {
-    key: "/data",
+    key: "/admin/data",
     label: <Link href="/data">数据管理</Link>,
     icon: <DatabaseOutlined />,
   },
   {
-    key: "/program",
+    key: "/admin/program",
     label: <Link href="/program">计算模块</Link>,
     icon: <CalculatorOutlined />,
   },
   {
-    key: "/model",
+    key: "/admin/model",
     label: <Link href="/model">仿真模型</Link>,
     icon: <DotChartOutlined />,
   },
   {
-    key: "/workflow",
+    key: "/admin/workflow",
     label: <Link href="/workflow">业务流程</Link>,
     icon: <BranchesOutlined />,
   },
   {
-    key: "/experiment",
+    key: "/admin/experiment",
     label: <Link href="/experiment">实验管理</Link>,
     icon: <ExperimentOutlined />,
   },
