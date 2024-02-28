@@ -7,7 +7,7 @@
     },
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": false
+        "source.organizeImports": "never"
     },
     "cSpell.words": [
         "antd",

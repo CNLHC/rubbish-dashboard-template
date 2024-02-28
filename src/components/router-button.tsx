@@ -10,7 +10,7 @@ const RouterButton = (props: ButtonProps & { goto: string }) => {
       {...props}
       onClick={useCallback(() => {
         router.push(props.goto)
-      }, [])}
+      }, [props.goto, router])}
     >
       Go To Admin
     </Button>
