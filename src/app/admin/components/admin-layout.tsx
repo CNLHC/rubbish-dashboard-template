@@ -5,7 +5,7 @@ import MainHeader from "./admin-header"
 import MainMenu from "./admin-menu"
 import classNames from "classnames"
 
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Footer, Sider } = Layout
 
 export default function MainLayout({
   children,
