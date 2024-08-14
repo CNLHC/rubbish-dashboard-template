@@ -38,7 +38,7 @@ export function ConfigGetString(key: string, _default?: string): string {
   return str
 }
 
-export function extractTRPCErr(e: any, fallback = "未知错误") {
+export function extractTRPCErr(e: Error, fallback = "未知错误") {
   const err = TRPCClientError.from(e)
   try {
     console.error(err)
@@ -49,12 +49,14 @@ export function extractTRPCErr(e: any, fallback = "未知错误") {
     if (obj?.[0]?.message) {
       return obj?.[0]?.message as string
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error(e)
+  }
   return (err.message as string) ?? fallback
 }
 
 export function prefixedWith(prefix: string) {
-  return (key: any) => {
+  return (key: unknown) => {
     if (typeof key == "string") return key.startsWith(prefix)
     if (Array.isArray(key)) {
       for (const k of key) {

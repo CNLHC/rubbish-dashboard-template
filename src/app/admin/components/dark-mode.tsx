@@ -8,15 +8,14 @@ export const DarkCtx = React.createContext<{
 
 export const useDarkControl = () => {
   const { isDarkMode, setIsDarkMode } = React.useContext(DarkCtx)!
-  const { setColorScheme: setMantineColorScheme} =
-    useMantineColorScheme()
+  const { setColorScheme: setMantineColorScheme } = useMantineColorScheme()
   const _setIsDarkMode = useCallback(
     (dark: boolean) => {
       setMantineColorScheme(dark ? "dark" : "light")
       setIsDarkMode(dark)
     },
 
-    [ setIsDarkMode, setMantineColorScheme]
+    [setIsDarkMode, setMantineColorScheme]
   )
   return { isDarkMode, setIsDarkMode: _setIsDarkMode }
 }

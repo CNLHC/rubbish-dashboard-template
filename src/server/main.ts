@@ -1,13 +1,22 @@
 import cors from "@fastify/cors"
+import ws from "@fastify/websocket"
 import fastifySwagger from "@fastify/swagger"
 import fastifySwaggerUI from "@fastify/swagger-ui"
+
+import {
+  appRouter as demobaseRouter,
+  fastifyTRPCPlugin as demoBaseFastifyTRPCPlugin,
+  createContext,
+  AppRouter,
+  FastifyTRPCPluginOptions,
+} from "@sought/demobase"
 import { Type, TypeBoxTypeProvider } from "@fastify/type-provider-typebox"
 import fastify, { FastifyPluginAsync } from "fastify"
 import { SiteConfig } from "../libs/site"
 import GetLogger from "./logger"
 import { fastifyTRPCPlugin } from "@trpc/server/adapters/fastify"
 import { fastifyTRPCOpenApiPlugin, generateOpenApiDocument } from "trpc-openapi"
-import { appRouter } from "./router"
+import { appRouter, AppRouter as TLocalAppRouter } from "./router"
 
 const logger = GetLogger()
 
@@ -59,7 +68,7 @@ const MetaView: FastifyPluginAsync = async (app) => {
         },
       },
     },
-    async (req) => {
+    async () => {
       return {
         version: SiteConfig.version,
       }
@@ -68,6 +77,7 @@ const MetaView: FastifyPluginAsync = async (app) => {
 }
 
 const initTRPC: FastifyPluginAsync = async (app) => {
+  app.register(ws)
   const openApiDocument = generateOpenApiDocument(appRouter, {
     title: "Example CRUD API",
     description: "OpenAPI compliant REST API built using tRPC with Fastify",
@@ -75,15 +85,29 @@ const initTRPC: FastifyPluginAsync = async (app) => {
     baseUrl: "http://localhost:7654/trpc",
     tags: ["meta"],
   })
-
   app.register(fastifyTRPCPlugin, {
-    prefix: "/trpc",
-    trpcOptions: { router: appRouter },
+    prefix: "/app-trpc",
+    useWSS: true,
+    trpcOptions: {
+      router: appRouter,
+      createContext,
+    } satisfies FastifyTRPCPluginOptions<TLocalAppRouter>["trpcOptions"],
+  })
+
+  app.register(demoBaseFastifyTRPCPlugin, {
+    prefix: "/demobase",
+    useWSS: true,
+    trpcOptions: {
+      router: demobaseRouter,
+      createContext: createContext,
+    } satisfies FastifyTRPCPluginOptions<AppRouter>["trpcOptions"],
   })
   app.register(fastifyTRPCOpenApiPlugin, {
     router: appRouter,
     basePath: "/trpc",
   })
+
+  app.get("/demobase/openapi.json", () => openApiDocument)
   app.get("/trpc/openapi.json", () => openApiDocument)
 }
 
@@ -108,7 +132,7 @@ async function serve() {
       host: "0.0.0.0",
     },
     (err, address) => {
-      if (err) logger.error(err)
+      if (err) logger.error(`error in listen at ${address} ${err}`)
     }
   )
 }

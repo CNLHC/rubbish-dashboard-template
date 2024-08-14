@@ -22,7 +22,3 @@ EXPOSE 8080
 
 ENTRYPOINT [ "sh","scripts/entrypoint.sh" ]
 
-
-
-
-
